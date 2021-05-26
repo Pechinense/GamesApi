@@ -45,8 +45,7 @@ public class GamesOfBrowserActivity extends AppCompatActivity {
         setupView();
         initRetrofit();
         throwPetition();
-
-
+        //ddkjh
     }
 
     private void setupView() {
