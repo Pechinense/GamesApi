@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ListGames implements Parcelable
-{
+{ // aiaoadnd
 
     @SerializedName("id")
     @Expose
