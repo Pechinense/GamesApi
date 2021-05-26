@@ -45,7 +45,8 @@ public class GamesOfBrowserActivity extends AppCompatActivity {
         setupView();
         initRetrofit();
         throwPetition();
-        //ddkjh
+
+
     }
 
     private void setupView() {
@@ -55,7 +56,7 @@ public class GamesOfBrowserActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
 
-                ListGamesBrowser id = gamesBrowsers.get(position);
+                int id = gamesBrowsers.get(position).getId();
 
                 Intent intent = new Intent(GamesOfBrowserActivity.this, DetailGamesActivity.class);
                 intent.putExtra("id", id);

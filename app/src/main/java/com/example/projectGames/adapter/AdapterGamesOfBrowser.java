@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,17 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectGames.R;
 import com.example.projectGames.Utils.CustomItemClick;
-import com.example.projectGames.models.ListGames;
 import com.example.projectGames.models.ListGamesBrowser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterGamesOfBrowser extends RecyclerView.Adapter<AdapterGamesOfBrowser.HolderBrowserGames> implements Filterable {
+public class AdapterGamesOfBrowser extends RecyclerView.Adapter<AdapterGamesOfBrowser.HolderBrowserGames> {
 
     private List<ListGamesBrowser> listGamesBrowsers;
-    private List<ListGamesBrowser> copia_listGamesBrowsers;
     private final Context context;
     private CustomItemClick listener;
 
@@ -66,41 +62,6 @@ public class AdapterGamesOfBrowser extends RecyclerView.Adapter<AdapterGamesOfBr
         return listGamesBrowsers.size();
     }
 
-    @Override
-    public Filter getFilter() {
-        Filter filter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                String buscar = constraint.toString();
-                if (buscar.isEmpty()){
-                    listGamesBrowsers=copia_listGamesBrowsers;
-                }else{
-                    List<ListGamesBrowser> listaAuxiliar = new ArrayList<>();
-                    for (ListGamesBrowser juego:copia_listGamesBrowsers){
-                        String busca = buscar.toLowerCase();
-                        String gatea = juego.getTitle().toLowerCase();
-
-                        if (gatea.contains(busca)){
-                            listaAuxiliar.add(juego);
-                        }
-                    }
-                    listGamesBrowsers = listaAuxiliar;
-                }
-                FilterResults results = new FilterResults();
-                results.values=listGamesBrowsers;
-                return results;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                listGamesBrowsers=(List<ListGamesBrowser>) results.values;
-                notifyDataSetChanged();
-            }
-        };
-
-        return filter;
-    }
-
 
     static class HolderBrowserGames extends RecyclerView.ViewHolder {
 
@@ -120,9 +81,6 @@ public class AdapterGamesOfBrowser extends RecyclerView.Adapter<AdapterGamesOfBr
 
     public void setList(List<ListGamesBrowser> list) {
         this.listGamesBrowsers = list;
-        this.copia_listGamesBrowsers = list;
         notifyDataSetChanged();
     }
-
-
 }

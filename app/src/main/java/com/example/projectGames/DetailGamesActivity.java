@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.projectGames.models.ListGames;
 import com.example.projectGames.models.OneGame;
 import com.example.projectGames.webServiceClient.WebServiceClient;
 import com.squareup.picasso.Picasso;
@@ -36,7 +35,7 @@ public class DetailGamesActivity extends AppCompatActivity {
     private TextView tvDetailDeveloper;
     private TextView tvShortDescription;
     private TextView tvDescription;
-    private ListGames id;
+    private int id;
     private OneGame oneGame;
 
     @Override
@@ -50,9 +49,9 @@ public class DetailGamesActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null && bundle.containsKey("id")) {
-             id = bundle.getParcelable("id");
+             id = bundle.getInt("id");
 
-             Log.i("tag", String.valueOf(id.getId()));
+             Log.i("tag", String.valueOf(id));
         }
     }
 
@@ -79,7 +78,7 @@ public class DetailGamesActivity extends AppCompatActivity {
     }
 
     private void throwPetition() {
-        Call<OneGame> petition = webServiceClient.getOneGame(id.getId());
+        Call<OneGame> petition = webServiceClient.getOneGame(id);
         petition.enqueue(new Callback<OneGame>() {
             @Override
             public void onResponse(Call<OneGame> call, Response<OneGame> response) {
@@ -99,7 +98,7 @@ public class DetailGamesActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<OneGame> call, Throwable t) {
                 Log.d("RETROFIT", "Error: " + t.getMessage());
-                showErrorMessage();
+
             }
         });
 
