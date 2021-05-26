@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         // Parte de Antonio
 
 
@@ -31,7 +34,30 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mymenu, menu);
+<<<<<<< Updated upstream
         return true;
+=======
+
+        // Parte de pechin
+
+        MenuItem searchItem = menu.findItem(R.id.menu_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                adapter.getFilter().filter(query);
+                return true ;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+//                adapter.getFilter().filter(newText);
+                return true ;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+
+>>>>>>> Stashed changes
     }
 
     @Override
